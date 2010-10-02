@@ -10,7 +10,7 @@ class SexpParser
     string.gsub!(")", " ) ")
     string_array = string.split
     tokens = process_tokens( string_array )
-    structure( tokens )
+    structure( tokens )[1]
   end
 
   # Iterate over an array of strings and turn each
@@ -41,11 +41,7 @@ class SexpParser
       end
       offset += 1
     end
-    if(internal)
-      return [offset, program]
-    else
-      return program
-    end
+    return [offset, program]
   end
 
   # Test to see whether a string represents a parentheses
