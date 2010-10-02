@@ -8,7 +8,7 @@ class SexpParser
   def parse( string )
     string.gsub!("(", " ( ")
     string.gsub!(")", " ) ")
-    string_array = string.split
+    string_array = string.split(" ")
     tokens = process_tokens( string_array )
     structure( tokens )[1]
   end
@@ -19,6 +19,7 @@ class SexpParser
     tokens = []
     token_array.each do |t|
       tokens << t and next if(is_paren?(t))
+      tokens << t.to_f and next if( is_float?(t))
       tokens << t.to_i and next if( is_integer?(t))
       tokens << t.to_sym and next if( is_identifier?(t) || is_symbol?(t))
       raise "\nUnrecognized token: #{t}\n"
@@ -52,6 +53,11 @@ class SexpParser
   # Test to see whether or not a string represents an integer
   def is_integer?( string )
     is_match?( string, /[0-9]+/ )
+  end
+
+  # Test to see whether or not a string represents a float
+  def is_float?( string )
+    is_match?( string, /[0-9]+\.[0-9]+/ )
   end
 
   # Test to see whether or not a string represents an identifier
