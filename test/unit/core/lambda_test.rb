@@ -1,51 +1,45 @@
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test_helper.rb'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', '..',  'test_helper.rb'))
 
 class LambdaTest < Test::Unit::TestCase
   
   test "should create new lambda that does not take arguments" do
     env = Interpreter.new.run([
       [:set!, :test, [:lambda, [],[
-        :begin, [:print, 1]
+        :begin, [:set!, :foo, 1]
       ]]]
     ])
     assert_kind_of Proc, env[:test]
   end
   
   test "should create and call new lambda without arguments" do
-    old_stdout = $stdout
-    buffer = StringIO.new
-    $stdout = buffer
     env = Interpreter.new.run([
+      [:set!, :foo, 2],
       [:set!, :test, [:lambda, [],[
-        :begin, [:print, 1]
+        :begin, [:set!, :foo, 1]
       ]]],
       [:test]      
     ])
-    $stdout = old_stdout
-    assert_equal "1", buffer.string
+    assert_equal 1, env[:foo]
   end
   
   test "should create new lambda that does take arguments" do
     env = Interpreter.new.run([
       [:set!, :test, [:lambda, [:a],[
-        :begin, [:print, :a]
+        :begin, [:set!, :foo, 1]
       ]]]
     ])
     assert_kind_of Proc, env[:test]
   end
   
   test "should create and call new lambda with arguments" do
-    old_stdout = $stdout
-    buffer = StringIO.new
-    $stdout = buffer
     env = Interpreter.new.run([
+      [:set!, :foo, 2],
       [:set!, :test, [:lambda, [:a],[
-        :begin, [:print, :a]
+        :begin, [:set!, :foo, :a]
       ]]],
-      [:test, 2]      
+      [:test, 3]      
     ])
-    $stdout = old_stdout
-    assert_equal "2", buffer.string
+    assert_equal 3, env[:foo]
   end
   
 end
