@@ -6,7 +6,7 @@ class PrintTest < Test::Unit::TestCase
     old_stdout = $stdout
     buffer = StringIO.new
     $stdout = buffer
-    Interpreter.new.run([[:print, 1]])
+    env = Interpreter.new.run([[:print, 1]])
     assert_equal "1", buffer.string
     $stdout = old_stdout
   end

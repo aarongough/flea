@@ -1,3 +1,5 @@
+Dir[File.join(File.dirname(__FILE__), 'standard_library', '*.rb')].each {|file| require File.expand_path(file) }
+
 class Environment < Hash
   def initialize( outer = nil )
     @outer = outer
@@ -12,6 +14,7 @@ end
 class Interpreter
   def run(ast)
     environment = Environment.new
+    ast = $standard_library + ast
     ast.each {|x| evaluate(x, environment)}
     return environment
   end
@@ -23,6 +26,7 @@ class Interpreter
   end
   
   def execute_function(x, env)
+    x = x.dup
     func = x.shift
     if func == :"set!"
       env.find(x[0])[x[0]] = evaluate(x[1], env)
@@ -35,12 +39,12 @@ class Interpreter
       end
       return val
     elsif func == :__native_function
-      function = "Proc.new do |list|\n"
+      function = "Proc.new do |list, env|\n"
       function += x[0]
       function += "\nend"
       return eval function
     elsif func == :lambda
-      return Proc.new() do |args|
+      return Proc.new() do |args, env|
         sub_env = Environment.new(env)
         vars = x[0]
         expression = x[1]
@@ -51,7 +55,7 @@ class Interpreter
       end
     else
       raise Exception, "'#{func}' is not a function" unless(env.find(func)[func])
-      return env.find(func)[func].call(x)
+      return env.find(func)[func].call(x, env)
     end
   end
 end
