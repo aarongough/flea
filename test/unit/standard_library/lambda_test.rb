@@ -3,7 +3,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', '..',  'test_he
 class LambdaTest < Test::Unit::TestCase
   
   test "should create new lambda that does not take arguments" do
-    env = Interpreter.new.run([
+    env = Flea.run([
       [:set!, :test, [:lambda, [],[
         :begin, [:set!, :foo, 1]
       ]]]
@@ -12,7 +12,7 @@ class LambdaTest < Test::Unit::TestCase
   end
   
   test "should create and call new lambda without arguments" do
-    env = Interpreter.new.run([
+    env = Flea.run([
       [:set!, :foo, 2],
       [:set!, :test, [:lambda, [],[
         :begin, [:set!, :foo, 1]
@@ -23,7 +23,7 @@ class LambdaTest < Test::Unit::TestCase
   end
   
   test "should create new lambda that does take arguments" do
-    env = Interpreter.new.run([
+    env = Flea.run([
       [:set!, :test, [:lambda, [:a],[
         :begin, [:set!, :foo, 1]
       ]]]
@@ -32,7 +32,7 @@ class LambdaTest < Test::Unit::TestCase
   end
   
   test "should create and call new lambda with arguments" do
-    env = Interpreter.new.run([
+    env = Flea.run([
       [:set!, :foo, 2],
       [:set!, :test, [:lambda, [:a],[
         :begin, [:set!, :foo, :a]

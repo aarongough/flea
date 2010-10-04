@@ -1,17 +1,11 @@
-class Environment < Hash
-  def initialize( outer = nil )
-    @outer = outer
+class Flea
+  def self.run(ast)
+    @@instance = self.new unless(defined? @@instance)
+    @@instance.execute(ast)
   end
 
-  def find(key)
-    return self if(self.has_key?(key) || @outer.nil?)
-    return @outer.find(key)
-  end
-end
-
-class Interpreter
-  def run(ast)
-    environment = Environment.new
+  def execute(ast)
+    environment = FleaEnvironment.new
     ast = $standard_library + ast
     ast.each {|x| evaluate(x, environment)}
     return environment

@@ -1,7 +1,7 @@
 $standard_library.concat([
   [:set!, :lambda, [:__native_function, "
     Proc.new() do |args, env|
-      sub_env = Environment.new(env)
+      sub_env = FleaEnvironment.new(env)
       vars = list[0]
       expression = list[1]
       vars.each_index do |i|

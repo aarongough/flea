@@ -3,7 +3,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'test_hel
 class BeginTest < Test::Unit::TestCase
   
   test "should execute each expression after the begin call and return final value" do
-    env = Interpreter.new.run([[:begin, 
+    env = Flea.run([[:begin, 
       [:set!, :test, 1],
       [:set!, :test, 2],
     ]])
