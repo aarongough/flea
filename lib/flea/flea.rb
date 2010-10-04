@@ -1,5 +1,3 @@
-Dir[File.join(File.dirname(__FILE__), 'standard_library', '*.rb')].each {|file| require File.expand_path(file) }
-
 class Environment < Hash
   def initialize( outer = nil )
     @outer = outer
