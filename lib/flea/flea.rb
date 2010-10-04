@@ -1,6 +1,9 @@
 class Flea
   def self.parse_and_run(string)
-    @@parser = Sexpistol.new unless(defined? @@parser)
+    unless(defined? @@parser)
+      @@parser = Sexpistol.new
+      @@parser.ruby_keyword_literals = true
+    end
     ast = @@parser.parse_string(string)
     self.run(ast)
   end

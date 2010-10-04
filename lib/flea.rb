@@ -3,5 +3,5 @@ Dir[File.join(File.dirname(__FILE__), 'flea', 'standard_library', '*.rb')].each 
 require "rubygems"
 require "sexpistol"
 
-require "flea/flea_environment.rb"
-require "flea/flea.rb"
+require File.expand_path(File.join(File.dirname(__FILE__), "flea", "flea_environment.rb"))
+require File.expand_path(File.join(File.dirname(__FILE__), "flea", "flea.rb"))
