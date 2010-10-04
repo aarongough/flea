@@ -26,7 +26,7 @@ class Interpreter
   def execute_function(x, env)
     x = x.dup
     func = x.shift
-    if func == :"set!"
+    if func == :"set!" || func == :define
       env.find(x[0])[x[0]] = evaluate(x[1], env)
     elsif func == :if
       return evaluate(x[1], env) if(evaluate(x[0], env))
@@ -41,16 +41,6 @@ class Interpreter
       function += x[0]
       function += "\nend"
       return eval function
-    elsif func == :lambda
-      return Proc.new() do |args, env|
-        sub_env = Environment.new(env)
-        vars = x[0]
-        expression = x[1]
-        vars.each_index do |i|
-          sub_env[vars[i]] = args[i]
-        end
-        evaluate(expression, sub_env)
-      end
     else
       raise Exception, "'#{func}' is not a function" unless(env.find(func)[func])
       return env.find(func)[func].call(x, env)
