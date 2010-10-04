@@ -28,8 +28,6 @@ class Interpreter
     func = x.shift
     if func == :"set!" || func == :define
       env.find(x[0])[x[0]] = evaluate(x[1], env)
-    elsif func == :if
-      return evaluate(x[1], env) if(evaluate(x[0], env))
     elsif func == :begin
       val = 0
       x.each do |i|
