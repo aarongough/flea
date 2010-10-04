@@ -8,11 +8,11 @@ task :default => :test
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "koi-vm-ruby"
-    gemspec.summary = "A Koi Virtual Machine written in Ruby"
-    gemspec.description = "A Virtual Machine for the Koi programming language written in Ruby."
+    gemspec.name = "flea"
+    gemspec.summary = "A tiny but flexible Scheme interpreter written in Ruby"
+    gemspec.description = "Flea is an extremely simple, but extremely extensible Scheme interpreter written in Ruby."
     gemspec.email = "aaron@aarongough.com"
-    gemspec.homepage = "http://github.com/aarongough/koi-vm-ruby"
+    gemspec.homepage = "http://github.com/aarongough/flea"
     gemspec.authors = ["Aaron Gough"]
     gemspec.rdoc_options << '--line-numbers' << '--inline-source'
     gemspec.extra_rdoc_files = ['README.rdoc', 'MIT-LICENSE']
@@ -22,7 +22,7 @@ rescue LoadError
 end
 
 
-desc 'Test koi-vm-ruby.'
+desc 'Test Flea.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib/*.rb'
   t.libs << 'test'
@@ -31,10 +31,10 @@ Rake::TestTask.new(:test) do |t|
 end
 
 
-desc 'Generate documentation for koi-vm-ruby.'
+desc 'Generate documentation for Flea.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Koi'
+  rdoc.title    = 'Flea'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb')
