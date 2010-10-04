@@ -1,4 +1,10 @@
 class Flea
+  def self.parse_and_run(string)
+    @@parser = Sexpistol.new unless(defined? @@parser)
+    ast = @@parser.parse_string(string)
+    self.run(ast)
+  end
+
   def self.run(ast)
     @@instance = self.new unless(defined? @@instance)
     @@instance.execute(ast)

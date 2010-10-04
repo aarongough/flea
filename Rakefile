@@ -16,6 +16,7 @@ begin
     gemspec.authors = ["Aaron Gough"]
     gemspec.rdoc_options << '--line-numbers' << '--inline-source'
     gemspec.extra_rdoc_files = ['README.rdoc', 'MIT-LICENSE']
+    gemspec.add_dependency "sexpistol"
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: gem install jeweler"
