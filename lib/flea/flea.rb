@@ -28,12 +28,6 @@ class Interpreter
     func = x.shift
     if func == :"set!" || func == :define
       env.find(x[0])[x[0]] = evaluate(x[1], env)
-    elsif func == :begin
-      val = 0
-      x.each do |i|
-        val = evaluate(i, env)
-      end
-      return val
     elsif func == :__native_function
       function = "Proc.new do |list, env|\n"
       function += x[0]
