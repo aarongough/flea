@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'flea.rb'))
+
+program_text = ARGF.read
+
+Flea.parse_and_run(program_text)
