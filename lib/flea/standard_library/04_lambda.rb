@@ -1,5 +1,5 @@
 $standard_library.concat([
-  [:set!, :lambda, [:__native_function, "
+  [:define, :lambda, [:__native_function, "
     Proc.new() do |args, env|
       sub_env = FleaEnvironment.new(env)
       vars = list[0]
