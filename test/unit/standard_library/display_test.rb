@@ -15,7 +15,7 @@ class PrintTest < Test::Unit::TestCase
     old_stdout = $stdout
     buffer = StringIO.new
     $stdout = buffer
-    Flea.run([[:display, [:quote, 1, 2, 3]]])
+    Flea.run([[:display, [:quote, [1, 2, 3]]]])
     assert_equal "(1 2 3)", buffer.string
     $stdout = old_stdout
   end
