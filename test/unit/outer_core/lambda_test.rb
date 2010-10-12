@@ -73,4 +73,13 @@ class LambdaTest < Test::Unit::TestCase
     end
   end
   
+  test "lambda should take list as an argument" do
+    env = Flea.run('
+      (define foo 0)
+      ((lambda a (
+          set! foo a)) 1 2 3)
+    ')
+    assert_equal [1,2,3], env[:foo]
+  end
+  
 end
