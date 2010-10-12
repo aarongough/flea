@@ -2,12 +2,12 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'test_hel
 
 class IfTest < Test::Unit::TestCase
   
-  test "should not print 1" do
-    env = Flea.run([[:begin, 
-      [:set!, :test, 1],
-      [:set!, :test, 2],
-    ]])
-    assert_equal(2, env[:test])
+  test "should define test to 1" do
+    env = Flea.run('
+      (if false
+        (define test 1))
+    ')
+    assert_equal(nil, env[:test])
   end
   
 end

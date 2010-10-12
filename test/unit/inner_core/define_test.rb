@@ -3,7 +3,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', '..',  'test_he
 class DefineTest < Test::Unit::TestCase
   
   test "should add variable to environment" do
-    env = Flea.run([[:define, :test, 1]])
+    env = Flea.run("(define test 1)")
     assert_equal(1, env[:test])
   end
   
