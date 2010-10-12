@@ -64,4 +64,13 @@ class LambdaTest < Test::Unit::TestCase
     assert_equal 3, env[:foo]
   end
   
+  test "should raise error when lambda is defined using same variable name multiple times in formals" do
+    assert_raises Exception do
+      env = Flea.run('
+        (lambda (a a a) (
+            set! foo a))
+      ')
+    end
+  end
+  
 end
