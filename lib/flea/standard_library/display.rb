@@ -1,0 +1,1 @@
+(define display (native_function "print @@parser.to_sexp(evaluate(list[0], env))"))

@@ -1,9 +1,10 @@
 class Flea
-  def self.run(string)
+  def self.run(string, includes = $standard_library)
     unless(defined? @@parser)
       @@parser = Sexpistol.new
       @@parser.ruby_keyword_literals = true
     end
+    string = includes + string
     ast = @@parser.parse_string(string)
     self.run_without_parse(ast)
   end
@@ -15,7 +16,6 @@ class Flea
 
   def execute(ast)
     environment = FleaEnvironment.new
-    ast = $standard_library + ast
     ast.each {|x| evaluate(x, environment)}
     return environment
   end
@@ -31,7 +31,7 @@ class Flea
     func = x.shift
     if func == :"set!" || func == :define
       env.find(x[0])[x[0]] = evaluate(x[1], env)
-    elsif func == :__native_function
+    elsif func == :native_function
       function = "Proc.new do |list, env|\n"
       function += x[0]
       function += "\nend"
