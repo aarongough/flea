@@ -27,18 +27,18 @@ class Flea
   end
   
   def execute_function(x, env)
-    x = x.dup
-    func = x.shift
-    if func == :"set!" || func == :define
-      env.find(x[0])[x[0]] = evaluate(x[1], env)
-    elsif func == :native_function
+    if x[0] == :"set!" || x[0] == :define
+      env.find(x[1])[x[1]] = evaluate(x[2], env)
+    elsif x[0] == :native_function
       function = "Proc.new do |list, env|\n"
-      function += x[0]
+      function += x[1]
       function += "\nend"
       return eval function
+    elsif x[0].is_a?(Array)
+      evaluate(x[0], env).call(x.slice(1, x.length), env)
     else
-      raise Exception, "'#{func}' is not a function" unless(env.find(func)[func])
-      return env.find(func)[func].call(x, env)
+      raise Exception, "'#{x[0]}' is not a function" unless(env.find(x[0])[x[0]])
+      return env.find(x[0])[x[0]].call(x.slice(1, x.length), env)
     end
   end
 end

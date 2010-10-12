@@ -24,6 +24,15 @@ class LambdaTest < Test::Unit::TestCase
     assert_equal 1, env[:foo]
   end
   
+  test "should create and call new lambda in place without arguments" do
+    env = Flea.run('
+      (define foo 0)
+      ((lambda () (
+          set! foo 3)))
+    ')
+    assert_equal 3, env[:foo]
+  end
+  
   test "should create new lambda that does take arguments" do
     env = Flea.run('
       (define foo 0)
@@ -39,9 +48,18 @@ class LambdaTest < Test::Unit::TestCase
       (define foo 0)
       (define test 
         (lambda (a) (
-          set! foo a)))
+          set! foo (+ a a))))
       
       (test 3)
+    ')
+    assert_equal 6, env[:foo]
+  end
+  
+  test "should create and call new lambda in place with arguments" do
+    env = Flea.run('
+      (define foo 0)
+      ((lambda (a) (
+          set! foo a)) 3)
     ')
     assert_equal 3, env[:foo]
   end
