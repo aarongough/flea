@@ -1,22 +1,49 @@
 (define lambda (native_function "
-  if(list[0].is_a?(Array))
-    raise Exception, 'A variable name cannot be used more than once when defining a lambda argument list.' unless(list[0].uniq.length == list[0].length)
-    Proc.new() do |args, env|
-      sub_env = FleaEnvironment.new(env)
-      vars = list[0]
-      expression = list[1]
-      vars.each_index do |i|
-        sub_env[vars[i]] = args[i]
-      end
-      evaluate(expression, sub_env)
-    end
-  elsif(list[0].is_a?(Symbol))
-    Proc.new() do |args, env|
-      sub_env = FleaEnvironment.new(env)
-      sub_env[list[0]] = args
-      evaluate(list[1], sub_env)
-    end
-  else
+  list = list.dup
+  formals = list.shift
+  body = list
   
+  raise Exception, 'A variable name cannot be used more than once when defining a lambda argument list.' if(formals.is_a?(Array) && formals.uniq.length != formals.length)
+  
+  if(formals.is_a?(Array))
+    if(formals.include?(:'.'))
+      Proc.new() do |args, env|
+        args = args.dup
+        sub_env = FleaEnvironment.new(env)
+        named_formals = formals.slice(0, formals.index(:'.'))
+        list_formal = formals[formals.index(:'.') + 1]
+        named_formals.each_index do |i|
+          sub_env[named_formals[i]] = args.shift
+        end
+        sub_env[list_formal] = args
+        result = nil
+        body.each do |expression|
+          result = evaluate(expression, sub_env)
+        end
+        result
+      end
+    else
+      Proc.new() do |args, env|
+        sub_env = FleaEnvironment.new(env)
+        formals.each_index do |i|
+          sub_env[formals[i]] = args[i]
+        end
+        result = nil
+        body.each do |expression|
+          result = evaluate(expression, sub_env)
+        end
+        result
+      end
+    end
+  elsif(formals.is_a?(Symbol))
+    Proc.new() do |args, env|
+      sub_env = FleaEnvironment.new(env)
+      sub_env[formals] = args
+      result = nil
+      body.each do |expression|
+        result = evaluate(expression, sub_env)
+      end
+      result
+    end
   end
 "))
