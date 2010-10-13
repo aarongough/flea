@@ -27,7 +27,7 @@ class Flea
   end
   
   def execute_function(x, env)
-    if x[0] == :"set!" || x[0] == :define
+    if x[0] == :define
       env.find(x[1])[x[1]] = evaluate(x[2], env)
     elsif x[0] == :native_function
       function = "Proc.new do |list, env|\n"
