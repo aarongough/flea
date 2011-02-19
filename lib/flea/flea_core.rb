@@ -2,7 +2,8 @@ class Flea
   def self.run(string, includes = $standard_library)
     unless(defined? @@parser)
       @@parser = Sexpistol.new
-      @@parser.ruby_keyword_literals = true
+      @@parser.ruby_keyword_literals = false
+      @@parser.scheme_compatability = true
     end
     string = includes + string
     ast = @@parser.parse_string(string)
