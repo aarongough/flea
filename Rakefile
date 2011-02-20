@@ -1,9 +1,5 @@
-require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
-
-desc 'Default: run unit tests.'
-task :default => :test
+require 'rubygems'
+require 'rspec/core/rake_task'
 
 begin
   require 'jeweler'
@@ -23,21 +19,9 @@ rescue LoadError
 end
 
 
-desc 'Test Flea.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib/*.rb'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
-end
-
-
-desc 'Generate documentation for Flea.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Flea'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README.rdoc')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-  rdoc.rdoc_files.include('app/**/*.rb')
+desc "Run the specs for Flea"
+RSpec::Core::RakeTask.new do |t|
+  t.rspec_opts = "-c"
+  t.fail_on_error = false
+  t.verbose = false
 end
