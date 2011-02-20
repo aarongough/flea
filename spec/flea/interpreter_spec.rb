@@ -11,11 +11,11 @@ describe "Flea" do
     end
     
     describe ".run" do
-      
+      pending
     end
     
     describe ".eval" do
-      
+      pending
     end
     
   end
