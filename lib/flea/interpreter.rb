@@ -33,7 +33,7 @@ module Flea
         return @current_environment.define expression[1], evaluate(expression[2])
       elsif expression[0] == :native_function
         return Core.create_native_function expression[1]
-      else
+      else # function call
         function = evaluate(expression[0])
         raise RuntimeError, "#{@parser.to_sexp(expression)}\n ^\n\n  #{function.inspec} is not a function" unless function.is_a? Proc
         arguments = expression.slice(1, expression.length)
