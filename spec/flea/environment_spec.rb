@@ -20,6 +20,14 @@ describe "Flea" do
         environment = Environment.new(parent_environment)
         environment.parent.should be parent_environment
       end
+      
+      it "should add base variables for #t and #f" do
+        environment = Environment.new
+        environment.should have_variable :"#t"
+        environment.should have_variable :"#f"
+        environment.find(:"#t").should be_true
+        environment.find(:"#f").should be_false
+      end
     end
     
     describe "#has_variable?" do
