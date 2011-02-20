@@ -12,37 +12,55 @@ describe "Flea" do
       
       it "should allow setting the base environment to use" do
         environment = mock("Environment")
-        interpreter = Interpreter.new(:environment => environment)
+        interpreter = Interpreter.new(:base_environment => environment)
         interpreter.base_environment.should be environment
       end
     end
     
     describe ".run" do
-      it "should run a program in a clean environment and return the resulting environment" do
-        environment = Interpreter.new.run("(define test 1)")
-        environment.should be_an Environment
-        environment.should have_variable :test
+      it "should run a program in a clean environment and return the last output from the program" do
+        interpreter = Interpreter.new
+        result = interpreter.run("(define test 1) test")
+        result.should == 1
+        interpreter.base_environment.should have_variable :test
       end
     end
     
-    describe ".eval" do
+    describe ".parse" do
+      it "should return an abstract syntax tree representing the supplied program" do
+        ast = Interpreter.new.parse("(define test 1)")
+        ast.should == [[:define, :test, 1]]
+      end
+    end
+    
+    describe ".evaluate" do
       before :each do
-        @interpreter = Interpreter.new
+        @environment = mock("Environment")
+        @interpreter = Interpreter.new(:base_environment => @environment)
       end
       
-      context "with no environment supplied" do
-        it "should interpret an integer literal and return the result" do
-          result = @interpreter.eval("1")
-          result.should == 1
-        end
+      it "should return the value of a variable" do
+        @environment.should_receive(:find).with(:test).and_return(1)
+        result = @interpreter.evaluate(:test)
+        result.should == 1
       end
       
-      context "with supplied environment" do
-        it "should interpret a symbol and return the value of the symbol" do
-          environment = mock("Environment")
-          environment.should_receive(:find).with(:test).and_return(1)
-          result = @interpreter.eval("test", environment)
-          result.should == 1
+      it "should define a variable in the current environment" do
+        @environment.should_receive(:define).with(:test, 1).and_return(1)
+        result = @interpreter.evaluate([:define, :test, 1])
+        result.should == 1
+      end
+      
+      it "should create a native function" do
+        result = @interpreter.evaluate([:native_function, "1"])
+        result.should be_a Proc
+        result.call.should == 1        
+      end
+      
+      [1, 1.0, "string"].each do |literal|
+        it "should return literal '#{literal}' as is" do
+          result = @interpreter.evaluate(literal)
+          result.should be literal
         end
       end
     end

@@ -1,7 +1,7 @@
 module Flea
   class Core
     
-    def self.native_function(content)
+    def self.create_native_function(content)
       eval "Proc.new do |environment, arguments|
         #{content}
       end"

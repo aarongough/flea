@@ -66,9 +66,10 @@ describe "Flea" do
     describe "#define" do
       it "should set a variable to the supplied value" do
         env = Environment.new
-        env.define(:test, 1)
+        result = env.define(:test, 1)
         env.should have_variable :test
         env.find(:test).should == 1
+        result.should == 1
       end
     end
     
