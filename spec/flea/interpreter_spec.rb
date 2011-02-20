@@ -57,6 +57,12 @@ describe "Flea" do
         result.call.should == 1        
       end
       
+      it "should call a native function" do
+        @environment.should_receive(:find).with(:foo).and_return(Proc.new {|a,b| "bar"})
+        result = @interpreter.evaluate([:foo, 1, 2, 3])
+        result.should == "bar"
+      end
+      
       [1, 1.0, "string"].each do |literal|
         it "should return literal '#{literal}' as is" do
           result = @interpreter.evaluate(literal)
