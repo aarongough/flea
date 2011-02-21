@@ -12,7 +12,10 @@ describe "Flea" do
       
       it "should allow setting the base environment to use" do
         environment = mock("Environment")
-        interpreter = Interpreter.new(:base_environment => environment)
+        interpreter = Interpreter.new(
+          :base_environment => environment,
+          :load_standard_library => false
+        )
         interpreter.base_environment.should be environment
       end
     end
@@ -36,7 +39,10 @@ describe "Flea" do
     describe ".evaluate" do
       before :each do
         @environment = mock("Environment")
-        @interpreter = Interpreter.new(:base_environment => @environment)
+        @interpreter = Interpreter.new(
+          :base_environment => @environment, 
+          :load_standard_library => false
+        )
       end
       
       it "should return the value of a variable" do

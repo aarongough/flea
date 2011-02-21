@@ -6,11 +6,13 @@ module Flea
     def initialize(options = {})
       options = {
         :base_environment => Environment.new,
+        :load_standard_library => true
       }.merge(options)
       @base_environment = @current_environment = options[:base_environment]
       @parser = Sexpistol.new
       @parser.ruby_keyword_literals = false
       @parser.scheme_compatability = true
+      load_standard_library unless options[:load_standard_library] == false
     end
     
     def run(program)
@@ -37,7 +39,18 @@ module Flea
         function = evaluate(expression[0])
         raise RuntimeError, "#{@parser.to_sexp(expression)}\n ^\n\n#{expression[0]} is not a function" unless function.is_a? Proc
         arguments = expression.slice(1, expression.length)
-        function.call(@current_environment, arguments)
+        function.call(@current_environment, arguments, self)
+      end
+    end
+    
+    private 
+    
+    def load_standard_library
+      library_pattern = File.join(File.dirname(__FILE__), 'standard_library', '*.scm')
+      Dir[library_pattern].each do |item|
+        File.open(item) do |file|
+          run(file.read)
+        end
       end
     end
     
