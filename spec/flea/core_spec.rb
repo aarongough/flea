@@ -11,17 +11,22 @@ describe "Flea" do
     end
     
     it "should return a Proc that expects two arguments" do
-      Core.create_native_function("").arity.should == 2
+      Core.create_native_function("").arity.should == 3
     end
     
     it "should return a Proc that sets the local variable 'environment'" do
       native_function = Core.create_native_function("defined?(environment)")
-      native_function.call(1,2).should be_true
+      native_function.call(1,2,3).should be_true
     end
     
     it "should return a Proc that sets the local variable 'arguments'" do
       native_function = Core.create_native_function("defined?(arguments)")
-      native_function.call(1,2).should be_true
+      native_function.call(1,2,3).should be_true
+    end
+    
+    it "should return a Proc that sets the local variable 'interpreter'" do
+      native_function = Core.create_native_function("defined?(interpreter)")
+      native_function.call(1,2,3).should be_true
     end
   end
   
