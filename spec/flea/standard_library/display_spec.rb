@@ -1,7 +1,5 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-require "stringio"
-
 describe "Standard Library" do
   describe "display" do
     before :each do
@@ -19,6 +17,11 @@ describe "Standard Library" do
     it "should output a list" do
       @interpreter.run('(display (quote (1 2 3)))')
       @buffer.string.should == "(1 2 3)"
+    end
+    
+    it "should return the same value that it displayed" do
+      result = @interpreter.run('(display "abc")')
+      result.should == "abc"
     end
     
     after :each do

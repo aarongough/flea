@@ -1,4 +1,6 @@
 (define display 
   (native_function "
-    print Sexpistol.new.to_sexp(interpreter.evaluate(arguments[0]))
+    output = Sexpistol.new.to_sexp(interpreter.evaluate(arguments[0]))
+    print output
+    output
   "))
