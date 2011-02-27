@@ -1,14 +1,8 @@
 = Flea
 
-Flea is a tiny Lisp interpreter implemented in Ruby. Flea is not designed to be a production language, instead it is designed to be an example of how simple it can be to bootstrap the core of a small flexible language.
+Flea is a tiny Lisp interpreter implemented in Ruby. Flea is not designed to be a production language, instead it is designed to be an example of how simple it can be to bootstrap the core of a small flexible language. Flea essentially defines a subset of R5RS Scheme, just enough to be fun and interesting.
 
-Flea's core is only about 100 lines of code, and provides a simple interface that is used to build the rest of the language. Flea is highly extensible because of its native_function method which allows Ruby Proc objects to be defined and then executed within the context of the Flea interpreter.
-
-=== Example
-
-Flea essentially defines a small subset of R5RS Scheme, just enough of it to be fun and interesting.
-
-The classic 'Hello world' looks like this:
+=== A Quick Example
 
   (display "Hello World\n")
 
@@ -27,6 +21,10 @@ After Flea is installed you can run a program by typing the following on the com
   flea /path/to/program
   
 You can also launch Flea's interactive shell by simply calling `flea` with no arguments.
+
+=== More
+
+Flea's core is only about 100 lines of code, and provides a simple interface that is used to build the rest of the language. Flea is highly extensible because of its native_function method which allows Ruby Proc objects to be defined and then executed within the context of the Flea interpreter.
 
 === Author & Credits
 
