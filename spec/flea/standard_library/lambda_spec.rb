@@ -35,12 +35,12 @@ describe "Standard Library" do
       result.should be_a Proc
     end
     
-    it "should create and execute a lambda that takes a single argument" do
+    it "should take list as single argument" do
       result = @interpreter.run('
         ((lambda a
-          (display a)) 1)
+          (display a)) 1 2 3)
       ')
-      result.should == 1
+      result.should == [1, 2, 3]
     end
     
     it "should create a lambda that takes multiple arguments" do
@@ -69,14 +69,6 @@ describe "Standard Library" do
   end
 end
   
-#  test "lambda should take list as an argument" do
-#    env = Flea.run('
-#      (define foo 0)
-#      ((lambda a (
-#          set! foo a)) 1 2 3)
-#    ')
-#    assert_equal [1,2,3], env[:foo]
-#  end
 #  
 #  test "lamda should take n-or-more arguments" do
 #    env = Flea.run('
