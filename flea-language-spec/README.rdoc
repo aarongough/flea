@@ -1,7 +1,3 @@
-= R5RS-Spec
+= Flea Language Specifcation
 
-R5RS-Spec is an executable language specification for R5RS Scheme written using AnySpec.
-
-Because it has no dependency on the target runtime this specification is very useful for bootstrapping the early stages of a new implementation, as well as giving you an idea of how much of the specification your target runtime implements.
-
-This specification has been tested against PLT-R5RS, and was used in the development of {FLea}[http://github.com/aarongough/flea]
+This is a small executable language specification for Flea written using {AnySpec}[https://github.com/aarongough/any-spec]. It basically serves as an integration test-suite for the language, and provides an easy way of doing test-first development of new language features.
