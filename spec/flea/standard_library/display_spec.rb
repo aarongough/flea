@@ -19,6 +19,11 @@ describe "Standard Library" do
       @buffer.string.should == "(1 2 3)"
     end
     
+    it "should output true and false using Scheme external representation" do
+      @interpreter.run('(display #t)(display #f)')
+      @buffer.string.should == "#t#f"
+    end
+    
     it "should return the same value that it displayed" do
       result = @interpreter.run('(display "abc")')
       result.should == "abc"

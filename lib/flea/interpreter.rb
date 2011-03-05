@@ -1,7 +1,9 @@
 module Flea
   class Interpreter
    
-   attr_accessor :base_environment, :current_environment
+   attr_accessor :base_environment, 
+                 :current_environment,
+                 :parser
    
     def initialize(options = {})
       options = {
