@@ -2,8 +2,8 @@
 (define b 0)
 (define test 
   (lambda (x y) 
-    (set! a x)
-    (set! b y)
+    (+ 5 x)
+    (+ 10 y)
     (+ x y)))
     
 (define c (test 1 2))
@@ -13,4 +13,4 @@
 
 ----
 
-assert_output "123"
+assert_output "003"
