@@ -1,6 +1,8 @@
 (define display 
   (native_function "
-    output = interpreter.evaluate(arguments[0])
-    print interpreter.parser.to_sexp(output)
-    output
+    Proc.new() do |arguments, interpreter|
+      output = interpreter.evaluate(arguments[0])
+      print interpreter.parser.to_sexp(output)
+      output
+    end
   "))

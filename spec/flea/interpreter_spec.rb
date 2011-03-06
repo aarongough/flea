@@ -58,7 +58,11 @@ describe "Flea" do
       end
       
       it "should create a native function" do
-        result = @interpreter.evaluate([:native_function, "1"])
+        result = @interpreter.evaluate([:native_function, "
+          Proc.new() do |arguments, interpreter|
+            1
+          end
+        "])
         result.should be_a Proc
         result.call.should == 1        
       end

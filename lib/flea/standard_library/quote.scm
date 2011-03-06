@@ -1,4 +1,6 @@
 (define quote 
   (native_function "
-    arguments[0]
+    Proc.new() do |arguments, interpreter|
+      arguments[0]
+    end
   "))

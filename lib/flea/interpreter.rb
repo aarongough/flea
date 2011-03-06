@@ -45,7 +45,7 @@ module Flea
         function = evaluate(expression[0])
         raise RuntimeError, "\n#{@parser.to_sexp(expression)}\n ^\n\n#{expression[0]} is not a function" unless function.is_a? Proc
         arguments = expression.slice(1, expression.length)
-        return function.call(@current_environment, arguments, self)
+        return function.call(arguments, self)
       end
     end
     
