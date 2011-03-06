@@ -6,8 +6,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
     gemspec.name = "flea"
-    gemspec.summary = "A tiny but flexible Scheme interpreter written in Ruby"
-    gemspec.description = "Flea is an extremely simple, but extremely extensible Scheme interpreter written in Ruby."
+    gemspec.summary = "A tiny but flexible Lisp interpreter written in Ruby"
+    gemspec.description = "Flea is an extremely simple, but extremely extensible Lisp interpreter written in Ruby."
     gemspec.email = "aaron@aarongough.com"
     gemspec.homepage = "http://github.com/aarongough/flea"
     gemspec.authors = ["Aaron Gough"]
@@ -15,6 +15,7 @@ begin
     gemspec.extra_rdoc_files = ['README.rdoc', 'MIT-LICENSE']
     gemspec.add_dependency "sexpistol"
     gemspec.add_development_dependency "any-spec"
+    gemspec.executables << 'flea'
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: gem install jeweler"
