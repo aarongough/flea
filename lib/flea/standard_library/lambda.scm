@@ -36,6 +36,7 @@
         sub_env.define(list_formal, args)
         execute_body.call(body, sub_env, interpreter)
       end
+      
     elsif formals.is_a? Array
       Proc.new() do |environment, arguments, interpreter|
         formals.each_index do |i|
@@ -43,6 +44,7 @@
         end
         execute_body.call(body, sub_env, interpreter)
       end
+      
     elsif formals.is_a? Symbol
       Proc.new() do |environment, arguments, interpreter|
         arguments = arguments.map {|x| interpreter.evaluate(x) }
