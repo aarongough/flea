@@ -22,7 +22,7 @@ After Flea is installed you can run a program by typing the following on the com
   
 You can also launch Flea's interactive shell by simply calling `flea` with no arguments.
 
-=== More
+=== More Info
 
 Flea's core is only about 100 lines of code, and provides a simple interface that is used to build the rest of the language. Flea is highly extensible because of its native_function method which allows Ruby Proc objects to be defined and then executed within the context of the Flea interpreter.
 
