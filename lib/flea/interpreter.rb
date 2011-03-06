@@ -39,8 +39,10 @@ module Flea
       
       if expression[0] == :define
         return @current_environment.define expression[1], evaluate(expression[2])
+        
       elsif expression[0] == :native_function
         return eval expression[1]
+        
       else # function call
         function = evaluate(expression[0])
         raise RuntimeError, "\n#{@parser.to_sexp(expression)}\n ^\n\n#{expression[0]} is not a function" unless function.is_a? Proc
