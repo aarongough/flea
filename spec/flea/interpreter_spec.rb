@@ -21,9 +21,9 @@ describe "Flea" do
     end
     
     describe ".run" do
-      it "should run a program in a clean environment and return the last output from the program" do
+      it "should run a program and return the last output from the program" do
         interpreter = Interpreter.new
-        result = interpreter.run("(define test 1) test")
+        result = interpreter.run("(define test 1)")
         result.should == 1
         interpreter.base_environment.should have_variable :test
       end
