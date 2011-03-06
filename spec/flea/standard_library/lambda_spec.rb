@@ -53,9 +53,9 @@ describe "Standard Library" do
     it "should create aand execute a lambda that takes multiple arguments" do
       result = @interpreter.run('
         ((lambda (a b c)
-          (display a b c)) (1 2 3))
+          (display (+ a b c))) 1 2 3)
       ')
-      result.should == [1, 2, 3]
+      result.should == 6
     end
     
     it "should raise an error when lamda is defined using same argument name more than once" do

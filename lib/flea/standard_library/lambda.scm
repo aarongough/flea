@@ -31,7 +31,7 @@
         named_formals = formals.slice(0, formals.index(:'.'))
         list_formal = formals[formals.index(:'.') + 1]
         named_formals.each_index do |i|
-          sub_env.define(named_formals[i], args.shift)
+          sub_env.define(named_formals[i], interpreter.evaluate(args.shift))
         end
         sub_env.define(list_formal, args)
         execute_body.call(body, sub_env, interpreter)
@@ -39,12 +39,13 @@
     elsif formals.is_a? Array
       Proc.new() do |environment, arguments, interpreter|
         formals.each_index do |i|
-          sub_env.define(formals[i], arguments[i])
+          sub_env.define(formals[i], interpreter.evaluate(arguments[i]))
         end
         execute_body.call(body, sub_env, interpreter)
       end
     elsif formals.is_a? Symbol
       Proc.new() do |environment, arguments, interpreter|
+        arguments = arguments.map {|x| interpreter.evaluate(x) }
         sub_env.define(formals, arguments)
         execute_body.call(body, sub_env, interpreter)
       end

@@ -2,7 +2,7 @@
   (lambda (index)
     (define current (- index 1))
     (display current)
-    (if (equal? current 0)
+    (if (equal? current 1)
       (display "... Blast off!")
       (begin 
         (display ", ")
