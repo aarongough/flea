@@ -16,6 +16,17 @@ module Flea
       @parser.ruby_keyword_literals = false
       @parser.scheme_compatability = true
       
+      define = Proc.new() do |arguments, interpreter|
+        interpreter.current_environment.define arguments[0], interpreter.evaluate(arguments[1])
+      end
+      
+      native_function = Proc.new() do |arguments, interpreter|
+        eval arguments[0]
+      end
+      
+      @base_environment.define(:define, define)
+      @base_environment.define(:native_function, native_function)
+      
       load_standard_library unless options[:load_standard_library] == false
     end
     
@@ -36,19 +47,12 @@ module Flea
     def evaluate(expression)
       return @current_environment.find(expression) if expression.is_a? Symbol
       return expression unless expression.is_a? Array
-      
-      if expression[0] == :define
-        return @current_environment.define expression[1], evaluate(expression[2])
         
-      elsif expression[0] == :native_function
-        return eval expression[1]
-        
-      else # function call
-        function = evaluate(expression[0])
-        raise RuntimeError, "\n#{@parser.to_sexp(expression)}\n ^\n\n#{expression[0]} is not a function" unless function.is_a? Proc
-        arguments = expression.slice(1, expression.length)
-        return function.call(arguments, self)
-      end
+      # function call
+      function = evaluate(expression[0])
+      raise RuntimeError, "\n#{@parser.to_sexp(expression)}\n ^\n\n#{expression[0]} is not a function" unless function.is_a? Proc
+      arguments = expression.slice(1, expression.length)
+      return function.call(arguments, self)
     end
     
     private 
