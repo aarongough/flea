@@ -41,6 +41,16 @@ After Flea is installed you can run a program by typing the following on the com
   
 You can also launch Flea's interactive shell by simply calling `flea` with no arguments.
 
+=== Author & Credits
+
+Author:: {Aaron Gough}[mailto:aaron@aarongough.com]
+
+Copyright (c) 2010 {Aaron Gough}[http://thingsaaronmade.com/] ({thingsaaronmade.com}[http://thingsaaronmade.com/]), released under the MIT license
+
+---
+
+== API Documentation and More Info
+
 === More Info
 
 Flea's core is only about 100 lines of code, and provides a simple interface that is used to build the rest of the language. Flea is highly extensible because of its foreign function interface which allows Ruby Proc objects to be defined and then executed within the context of the Flea interpreter. The entire standard library of the language is implemented using this foreign function interface. For example, here is the implementation of the multiplication operator:
@@ -116,7 +126,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
   (/ 100 2 2)
   # => 25
   
-(greater-than?) Returns true if it's first argument is greater than all the other, false otherwise:
+(greater-than?) Returns true if it's first argument is greater than all the others, false otherwise:
 
   (greater-than? 10 2 3 4)
   # => #t
@@ -262,8 +272,3 @@ For more info on lambda syntax read the {R5RS Scheme specification}[http://schem
        Interpreter class: Flea::Interpreter
        foo
 
-=== Author & Credits
-
-Author:: {Aaron Gough}[mailto:aaron@aarongough.com]
-
-Copyright (c) 2010 {Aaron Gough}[http://thingsaaronmade.com/] ({thingsaaronmade.com}[http://thingsaaronmade.com/]), released under the MIT license
