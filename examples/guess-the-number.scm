@@ -5,13 +5,6 @@
     end
   "))
   
-(define gets
-  (native_function "
-    Proc.new() do |arguments, interpreter|
-      $stdin.gets
-    end
-  "))
-  
 (define number (+ (rand 9) 1))
   
 (display "\n\nI'm thinking of a number between 1 and 10,\n")
