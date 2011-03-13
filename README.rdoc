@@ -73,17 +73,17 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
   (display "test")
   # => test
-  
+
   (display '(1 2 3))
   # => (1 2 3)
-  
+
 ==== Input
 
 (read) Reads and parses an s-expression from STDIN:
 
   (read) # user enters '(1 2 3)'
   # => (1 2 3)
-  
+
 (gets) Reads a string from STDIN:
 
   (gets) # user enters '(1 2 3)'
@@ -96,7 +96,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
   (define test 1)
   (display test)
   # => 1
-  
+
 (set!) Re-defines an existing variable:
 
   (define test 1)
@@ -110,22 +110,22 @@ Flea comes with a small but thoughtful standard library that includes functions 
   
   (+ 1 2 3)
   # => 6
-  
+
 (-) Subtract one or more numbers:
 
   (- 10 2 1)
   # => 7
-  
+
 (*) Multiply one or more numbers:
 
   (* 10 2 4)
   # => 80
-  
+
 (/) Divide one or more numbers:
 
   (/ 100 2 2)
   # => 25
-  
+
 (greater-than?) Returns true if it's first argument is greater than all the others, false otherwise:
 
   (greater-than? 10 2 3 4)
@@ -133,7 +133,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
   
   (greater-than? 1 2 3 4)
   # => #f
-  
+
 (less-than?) Returns true if it's first argument is smaller than all the others, false otherwise:
 
   (less-than? 1 3 4 5)
@@ -141,7 +141,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
   
   (less-than? 50 2 45 100)
    # => #f
-   
+
 (equal?) and (=) Return true if all their arguments are the same, false otherwise:
 
   (equal? 1 1 1)
@@ -149,14 +149,14 @@ Flea comes with a small but thoughtful standard library that includes functions 
   
   (= 1 2 3)
   # => #f
-  
+
 ==== List creation and manipulation
 
 (list) Creates a new list from it's arguments:
 
   (list (+ 1 2) "test" (rand 10))
   # => (3 "test" 5)
-  
+
 (list?) Returns true if it's first argument is a list, false otherwise:
 
   (list? '())
@@ -164,23 +164,23 @@ Flea comes with a small but thoughtful standard library that includes functions 
   
   (list? 1)
   # => #f
-  
+
 (list-tail) Returns a new list created by removing the first n elements of the provided list:
 
   (define a '(1 2 3 4 5 6))
   (list-tail a 3)
   # => (4 5 6)
-  
+
 (car) Returns the first item of a list:
 
   (car '(1 2 3))
   # => 1
-  
+
 (cdr) Returns the remainder of a list:
 
   (cdr '(1 2 3))
   # => (2 3)
-  
+
 (cons) Creates a new list by using it's first argument as the CAR it's second argument as the CDR:
 
   (cons '(1 2 3) 3)
@@ -191,12 +191,12 @@ Flea comes with a small but thoughtful standard library that includes functions 
   
   (cons 1 (2 3 4))
   # => (1 2 3 4)
-  
+
 (append) Creates a new list by concatenating it's arguments, it's first argument must be a list:
 
   (append '(1 2) '(3 4) 5)
   # => (1 2 3 4 5)
-  
+
 (null?) Returns true if it's first argument is null (the empty list):
 
   (null '())
@@ -207,7 +207,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
   
   (null? 1)
   # => #f
-  
+
 ==== Conditionals
 
 (if) If it's first argument is true then it will execute it's first code block, otherwise it will execute the second code block (if any):
@@ -221,7 +221,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
     (display "true")
     (display "false"))
   # => false
-  
+
 ==== Function creation
 
 (lambda) Creates a new function:
@@ -232,7 +232,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
       
   (adder 5)
   # => 15
-  
+
 For more info on lambda syntax read the {R5RS Scheme specification}[http://schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-7.html#%_sec_4.1.4]
 
 ==== Type conversion
@@ -241,7 +241,7 @@ For more info on lambda syntax read the {R5RS Scheme specification}[http://schem
 
   (string-to-num "123")
   # => 123
-  
+
 ==== Misc
 
 (rand) Returns a random number less than or equal to it's first argument:
@@ -251,7 +251,7 @@ For more info on lambda syntax read the {R5RS Scheme specification}[http://schem
   
   (rand 10)
   # => 6
-  
+
 ==== Foreign function interface
 
 (native_function) Takes a string representing a Ruby Proc object and returns it in a form that is able to be called like any other Flea function. The proc must take two arguments (arguments and interpreter):
