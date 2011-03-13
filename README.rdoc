@@ -41,12 +41,6 @@ After Flea is installed you can run a program by typing the following on the com
   
 You can also launch Flea's interactive shell by simply calling `flea` with no arguments.
 
-=== Author & Credits
-
-Author:: {Aaron Gough}[mailto:aaron@aarongough.com]
-
-Copyright (c) 2010 {Aaron Gough}[http://thingsaaronmade.com/] ({thingsaaronmade.com}[http://thingsaaronmade.com/]), released under the MIT license
-
 ---
 
 == API Documentation and More Info
@@ -271,4 +265,12 @@ For more info on lambda syntax read the {R5RS Scheme specification}[http://schem
        Arguments: [1, 2, 3, 4]
        Interpreter class: Flea::Interpreter
        foo
+       
+---
+
+=== Author & Credits
+
+Author:: {Aaron Gough}[mailto:aaron@aarongough.com]
+
+Copyright (c) 2010 {Aaron Gough}[http://thingsaaronmade.com/] ({thingsaaronmade.com}[http://thingsaaronmade.com/]), released under the MIT license
 
