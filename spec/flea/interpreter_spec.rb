@@ -11,7 +11,7 @@ describe "Flea" do
       end
       
       it "should allow setting the base environment to use" do
-        environment = Flea::Environment.new
+        environment = mock("Environment")
         interpreter = Interpreter.new(
           :base_environment => environment,
           :load_standard_library => false
@@ -38,18 +38,21 @@ describe "Flea" do
     
     describe ".evaluate" do
       before :each do
+        @environment = mock("Environment")
         @interpreter = Interpreter.new(
+          :base_environment => @environment, 
           :load_standard_library => false
         )
       end
       
       it "should return the value of a variable" do
-        @interpreter.current_environment.define(:test, 1)
+        @environment.should_receive(:find).with(:test).and_return(1)
         result = @interpreter.evaluate(:test)
         result.should == 1
       end
       
       it "should define a variable in the current environment" do
+        @environment.should_receive(:define).with(:test, 1).and_return(1)
         result = @interpreter.evaluate([:define, :test, 1])
         result.should == 1
       end
@@ -65,10 +68,7 @@ describe "Flea" do
       end
       
       it "should call a native function" do
-        proc = Proc.new() do |arguments, interpreter|
-          "bar"
-        end
-        @interpreter.current_environment.define(:foo, proc)
+        @environment.should_receive(:find).with(:foo).and_return(Proc.new {|a,b| "bar"})
         result = @interpreter.evaluate([:foo, 1, 2, 3])
         result.should == "bar"
       end
