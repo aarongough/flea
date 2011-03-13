@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+require 'stringio'
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'flea.rb'))
+
+interpreter = Flea::Interpreter.new
+
+if ARGV.length > 0
+  interpreter.run(ARGF.read)
+  exit
+end
+
+loop do
+  program = []
+  indent = 0
+  loop do
+    print "> " + ("  " * indent)
+    program << gets
+    
+    tmp_program = program.join(" ")
+    open_p_count = tmp_program.count("(")
+    close_p_count = tmp_program.count(")")
+    
+    break if open_p_count == close_p_count
+    indent += 1 if program.last.count("(") > program.last.count(")")
+    indent -= 1 if program.last.count("(") < program.last.count(")")
+  end
+  program = program.join(" ")
+  exit if program.strip == "quit"
+  
+  old_stdout = $stdout
+  buffer = StringIO.new
+  $stdout = buffer
+  result = interpreter.run program
+  $stdout = old_stdout
+  print buffer.string
+  print "\n" unless buffer.string.empty?
+  puts " => #{result.inspect}"
+end
