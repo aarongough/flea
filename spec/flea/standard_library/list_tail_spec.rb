@@ -5,13 +5,13 @@ describe "Standard Library" do
     before :each do
       @interpreter = Flea::Interpreter.new
     end
-    
+
     it "should return trailing subset of list" do
       result = @interpreter.run('
         (list-tail (quote (1 2 3 4 5)) 2)
       ')
-      result.should == [3, 4, 5]
+      expect(result).to be == [3, 4, 5]
     end
-    
+
   end
 end

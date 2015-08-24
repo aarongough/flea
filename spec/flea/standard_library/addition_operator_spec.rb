@@ -5,19 +5,19 @@ describe "Standard Library" do
     before :each do
       @interpreter = Flea::Interpreter.new
     end
-    
+
     it "should add several numbers" do
       result = @interpreter.run('(+ 1 2 3)')
-      result.should == 6
+      expect(result).to be == 6
     end
-    
+
     it "should evaluate its arguments before adding them" do
       result = @interpreter.run('
         (define a 2)
         (+ a a a)
       ')
-      result.should == 6
+      expect(result).to be == 6
     end
-    
+
   end
 end

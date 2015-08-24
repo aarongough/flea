@@ -5,22 +5,22 @@ describe "Standard Library" do
     before :each do
       @interpreter = Flea::Interpreter.new
     end
-  
+
     it "should return true for an empty list" do
       result = @interpreter.run('
         (null? \'())
       ')
-      result.should == true
+      expect(result).to be == true
     end
-    
+
     ["1", '"abc"', "(1 2 3)"].each do |value|
       it "should return false for #{value}" do
         result = @interpreter.run("
           (null? (quote #{value}))
         ")
-        result.should == false
+        expect(result).to be == false
       end
     end
-    
+
   end
 end

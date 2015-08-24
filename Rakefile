@@ -11,10 +11,12 @@ begin
     gemspec.email = "aaron@aarongough.com"
     gemspec.homepage = "http://github.com/aarongough/flea"
     gemspec.authors = ["Aaron Gough"]
+    gemspec.license = "MIT"
     gemspec.rdoc_options << '--line-numbers' << '--inline-source'
     gemspec.extra_rdoc_files = ['README.rdoc', 'MIT-LICENSE']
-    gemspec.add_dependency "sexpistol"
-    gemspec.add_development_dependency "any-spec"
+    gemspec.add_dependency "sexpistol", "= 0.0.7"
+    gemspec.add_development_dependency "any-spec", "= 0.1.0"
+    gemspec.add_development_dependency "rspec", "= 3.3.0"
     gemspec.executables << 'flea'
   end
 rescue LoadError
