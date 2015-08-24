@@ -5,13 +5,13 @@ describe "Standard Library" do
     before :each do
       @interpreter = Flea::Interpreter.new
     end
-    
+
     it "should return first item of list" do
       result = @interpreter.run('
         (car (quote (10 2 2)))
       ')
-      result.should == 10
+      expect(result).to be == 10
     end
-    
+
   end
 end

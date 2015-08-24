@@ -8,16 +8,16 @@ describe "Standard Library" do
       @buffer = StringIO.new
       $stdin = @buffer
     end
-    
+
     it "should get input from STDIN" do
       @buffer.string = "test\n"
       result = @interpreter.run('(gets)')
-      result.should == "test\n"
+      expect(result).to be == "test\n"
     end
-    
+
     after :each do
       $stdin = @old_stdin
     end
-    
+
   end
 end
