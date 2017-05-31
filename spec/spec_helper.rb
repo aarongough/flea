@@ -1,10 +1,6 @@
-require 'rubygems'
-require 'rspec'
-require 'stringio'
+require "bundler/setup"
+require "flea"
 
-require_files = []
-require_files << File.join(File.dirname(__FILE__), '..', 'lib',  'flea.rb')
-
-require_files.each do |file|
-  require File.expand_path(file)
+RSpec.configure do |config|
+  
 end

@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'stringio'
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'flea.rb'))
+require "bundler/setup"
+require "flea"
 
 interpreter = Flea::Interpreter.new
 

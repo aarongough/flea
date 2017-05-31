@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../../spec_helper'
+require "spec_helper"
 
 describe "Standard Library" do
   describe "set!" do
@@ -16,7 +16,7 @@ describe "Standard Library" do
     it "should raise error when attempting to set unbound variable" do
       lambda {
         @interpreter.run('(set! test 1)')
-      }.should raise_error
+      }.should raise_error(TypeError)
     end
     
   end
