@@ -1,5 +1,3 @@
-
-
 # Flea
 
 Flea is a tiny Lisp interpreter implemented in Ruby. Flea is not designed to be a production language, instead it is designed to be an example of how simple it can be to bootstrap the core of a small flexible language. Flea essentially defines an informal subset of Scheme, just enough to be fun and interesting.
@@ -8,7 +6,7 @@ Flea is a tiny Lisp interpreter implemented in Ruby. Flea is not designed to be 
 
 This is the classic 'guess the number' program implemented in Flea:
 
-```lisp
+```scheme
 (define number (+ (rand 9) 1))
 
   (display "\n\nI'm thinking of a number between 1 and 10,\n")
@@ -49,7 +47,7 @@ You can also launch Flea's interactive shell by simply calling `flea` with no ar
 
 Flea's core is only about 100 lines of code, and provides a simple interface that is used to build the rest of the language. Flea is highly extensible because of its foreign function interface which allows Ruby Proc objects to be defined and then executed within the context of the Flea interpreter. The entire standard library of the language is implemented using this foreign function interface. For example, here is the implementation of the multiplication operator:
 
-```lisp
+```scheme
 (define * 
   (native_function "
     Proc.new() do |arguments, interpreter|
@@ -67,7 +65,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(display)` Outputs data to STDOUT:
 
-```lisp
+```scheme
 (display "test")
 # => test
 
@@ -79,14 +77,14 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(read)` Reads and parses an s-expression from STDIN:
 
-```lisp
+```scheme
 (read) # user enters '(1 2 3)'
 # => (1 2 3)
 ```
 
 `(gets)` Reads a string from STDIN:
 
-```lisp
+```scheme
 (gets) # user enters '(1 2 3)'
 # => "(1 2 3)"
 ```
@@ -95,7 +93,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(define)` Sets a variable:
 
-```lisp
+```scheme
 (define test 1)
 (display test)
 # => 1
@@ -103,7 +101,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(set!)` Re-defines an existing variable:
 
-```lisp
+```scheme
 (define test 1)
 (set! test 2)
 (display test)
@@ -114,35 +112,35 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(+)` Add one or more numbers:
 
-```lisp  
+```scheme  
 (+ 1 2 3)
 # => 6
 ```
 
 `(-)` Subtract one or more numbers:
 
-```lisp
+```scheme
 (- 10 2 1)
 # => 7
 ```
 
 `(*)` Multiply one or more numbers:
 
-```lisp
+```scheme
 (* 10 2 4)
 # => 80
 ```
 
 `(/)` Divide one or more numbers:
 
-```lisp
+```scheme
 (/ 100 2 2)
 # => 25
 ```
 
 `(greater-than?)` Returns true if it's first argument is greater than all the others, false otherwise:
 
-```lisp
+```scheme
 (greater-than? 10 2 3 4)
 # => #t
 
@@ -152,7 +150,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(less-than?)` Returns true if it's first argument is smaller than all the others, false otherwise:
 
-```lisp
+```scheme
 (less-than? 1 3 4 5)
 # => #t
 
@@ -162,7 +160,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(equal?)` and `(=)` Return true if all their arguments are the same, false otherwise:
 
-```lisp
+```scheme
 (equal? 1 1 1)
 # => #t
 
@@ -174,14 +172,14 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(list)` Creates a new list from it's arguments:
 
-```lisp
+```scheme
 (list (+ 1 2) "test" (rand 10))
 # => (3 "test" 5)
 ```
 
 `(list?)` Returns true if it's first argument is a list, false otherwise:
 
-```lisp
+```scheme
 (list? '())
 # => #t
 
@@ -191,7 +189,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(list-tail)` Returns a new list created by removing the first n elements of the provided list:
 
-```lisp
+```scheme
 (define a '(1 2 3 4 5 6))
 (list-tail a 3)
 # => (4 5 6)
@@ -199,21 +197,21 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(car)` Returns the first item of a list:
 
-```lisp
+```scheme
 (car '(1 2 3))
 # => 1
 ```
 
 `(cdr)` Returns the remainder of a list:
 
-```lisp
+```scheme
 (cdr '(1 2 3))
 # => (2 3)
 ```
 
 `(cons)` Creates a new list by using it's first argument as the CAR it's second argument as the CDR:
 
-```lisp
+```scheme
 (cons '(1 2 3) 3)
 # => ((1 2 3) 3)
 
@@ -227,14 +225,14 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(append)` Creates a new list by concatenating it's arguments, it's first argument must be a list:
 
-```lisp
+```scheme
 (append '(1 2) '(3 4) 5)
 # => (1 2 3 4 5)
 ```
 
 `(null?)` Returns true if it's first argument is null (the empty list):
 
-```lisp
+```scheme
 (null '())
 # => #t
 
@@ -249,7 +247,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(if)` If it's first argument is true then it will execute it's first code block, otherwise it will execute the second code block (if any):
 
-```lisp
+```scheme
 (if (equal? 1 1)
   (display "true")
   (display "false"))
@@ -265,7 +263,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 
 `(lambda)` Creates a new function:
 
-```lisp
+```scheme
 (define adder
   (lambda (a)
     (+ a 10)))
@@ -280,7 +278,7 @@ For more info on lambda syntax read the [R5RS Scheme specification](http://schem
 
 `(string-to-num)` Converts a string containing a number into a numeric literal:
 
-```lisp
+```scheme
 (string-to-num "123")
 # => 123
 ```
@@ -289,7 +287,7 @@ For more info on lambda syntax read the [R5RS Scheme specification](http://schem
 
 `(rand)` Returns a random number less than or equal to it's first argument:
 
-```lisp
+```scheme
 (rand 10)
 # => 1
 
@@ -301,7 +299,7 @@ For more info on lambda syntax read the [R5RS Scheme specification](http://schem
 
 `(native_function)` Takes a string representing a Ruby Proc object and returns it in a form that is able to be called like any other Flea function. The proc must take two arguments (arguments and interpreter):
 
-```lisp
+```scheme
 (define test
   (native_function "
     Proc.new() do |arguments, interpreter|
@@ -318,7 +316,19 @@ For more info on lambda syntax read the [R5RS Scheme specification](http://schem
      Interpreter class: Flea::Interpreter
      foo
 ```
-       
+   
+## Development and Testing:
+
+Before doing any development work make sure you have all the development dependencies installed by running `bundle install` in the root of the project directory.
+
+Making changes to Flea is made simpler by the presence of an extensive test suite. Tests are written in [RSpec](https://rspec.info/) and live in the `/spec` folder. To run the tests simply type `rspec` in the root of the project directory.
+
+Flea also has an 'executable language specification' which is a series of small programs that exercise every part of the language and also assert what the output for each small program should be. The language specification is written with the use of a helper tool called [AnySpec](https://github.com/aarongough/any-spec), and the test cases can be found at `/flea-language-spec`. To run the executable language specification run the following command from the root of the project directory:
+
+```
+any-spec ./bin/flea flea-language-spec/flea-language-spec.yaml
+```
+
 ---
 
 ### Author & Credits:
