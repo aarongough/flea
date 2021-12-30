@@ -8,12 +8,12 @@ describe "Standard Library" do
     
     it "return true if it's first argument is larger than all the others" do
       result = @interpreter.run('(greater-than? 10 1 2 3 4)')
-      result.should == true
+      expect(result).to be true
     end
     
     it "return false if it's first argument is not larger than all the others" do
       result = @interpreter.run('(greater-than? 10 1 2 3 45)')
-      result.should == false
+      expect(result).to be false
     end
     
     it "should evaluate its arguments" do
@@ -22,7 +22,8 @@ describe "Standard Library" do
         (define b 10)
         (greater-than? b a a)
       ')
-      result.should == true
+      
+      expect(result).to be true
     end
     
   end

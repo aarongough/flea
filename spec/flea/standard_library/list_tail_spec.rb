@@ -10,7 +10,8 @@ describe "Standard Library" do
       result = @interpreter.run('
         (list-tail (quote (1 2 3 4 5)) 2)
       ')
-      result.should == [3, 4, 5]
+      
+      expect(result).to eq([3, 4, 5])
     end
     
   end

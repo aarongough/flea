@@ -8,7 +8,7 @@ describe "Standard Library" do
     
     it "should add several numbers" do
       result = @interpreter.run('(+ 1 2 3)')
-      result.should == 6
+      expect(result).to eq(6)
     end
     
     it "should evaluate its arguments before adding them" do
@@ -16,7 +16,8 @@ describe "Standard Library" do
         (define a 2)
         (+ a a a)
       ')
-      result.should == 6
+
+      expect(result).to eq(6)
     end
     
   end

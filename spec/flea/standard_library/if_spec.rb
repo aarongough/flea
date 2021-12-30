@@ -12,7 +12,7 @@ describe "Standard Library" do
           (if #t
             (define consequent 1))
         ')
-        @interpreter.base_environment.should have_variable :consequent
+        expect(@interpreter.base_environment).to have_variable(:consequent)
       end
       
       it "should not execute consequent" do
@@ -20,7 +20,7 @@ describe "Standard Library" do
           (if #f
             (define consequent 1))
         ')
-        @interpreter.base_environment.should_not have_variable :consequent
+        expect(@interpreter.base_environment).not_to have_variable(:consequent)
       end
       
       it "should evaluate arguments before deciding on execution" do
@@ -29,7 +29,7 @@ describe "Standard Library" do
           (if test
             (define consequent 1))
         ')
-        @interpreter.base_environment.should have_variable :consequent
+        expect(@interpreter.base_environment).to have_variable(:consequent)
       end
     end
     
@@ -40,8 +40,8 @@ describe "Standard Library" do
             (define consequent 1)
             (define alternative 1))
         ')
-        @interpreter.base_environment.should_not have_variable :consequent
-        @interpreter.base_environment.should have_variable :alternative
+        expect(@interpreter.base_environment).not_to have_variable(:consequent)
+        expect(@interpreter.base_environment).to have_variable(:alternative)
       end
       
       it "should execute consequent" do
@@ -50,8 +50,8 @@ describe "Standard Library" do
             (define consequent 1)
             (define alternative 1))
         ')
-        @interpreter.base_environment.should have_variable :consequent
-        @interpreter.base_environment.should_not have_variable :alternative
+        expect(@interpreter.base_environment).to have_variable(:consequent)
+        expect(@interpreter.base_environment).not_to have_variable(:alternative)
       end
     end
     

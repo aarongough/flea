@@ -8,7 +8,7 @@ describe "Standard Library" do
     
     it "should subtract several numbers" do
       result = @interpreter.run('(- 9 2 2)')
-      result.should == 5
+      expect(result).to eq(5)
     end
     
     it "should evaluate its arguments before subtracting them" do
@@ -17,7 +17,8 @@ describe "Standard Library" do
         (define b 9)
         (- b a a)
       ')
-      result.should == 5
+      
+      expect(result).to eq(5)
     end
     
   end

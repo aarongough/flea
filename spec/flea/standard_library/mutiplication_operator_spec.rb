@@ -8,7 +8,7 @@ describe "Standard Library" do
     
     it "should multiply several numbers" do
       result = @interpreter.run('(* 2 2 2)')
-      result.should == 8
+      expect(result).to eq(8)
     end
     
     it "should evaluate its arguments before multiplying them" do
@@ -16,7 +16,7 @@ describe "Standard Library" do
         (define a 2)
         (* a a a)
       ')
-      result.should == 8
+      expect(result).to eq(8)
     end
     
   end

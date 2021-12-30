@@ -11,7 +11,8 @@ describe "Standard Library" do
         result = @interpreter.run('
           (= 2 2 2)
         ')
-        result.should == true
+
+        expect(result).to be true
       end
       
       it "should evaluate its arguments before comparing them" do
@@ -19,7 +20,8 @@ describe "Standard Library" do
           (define a 2)
           (= a a a)
         ')
-        result.should == true
+        
+        expect(result).to be true
       end
     end
     
@@ -28,7 +30,8 @@ describe "Standard Library" do
         result = @interpreter.run('
           (= 2 2 4)
         ')
-        result.should == false
+        
+        expect(result).to be false
       end
       
       it "should evaluate its arguments before comparing them" do
@@ -37,7 +40,8 @@ describe "Standard Library" do
           (define b 3)
           (= a a b)
         ')
-        result.should == false
+        
+        expect(result).to be false
       end
     end
     

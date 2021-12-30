@@ -12,7 +12,7 @@ describe "Standard Library" do
     it "should get input from STDIN" do
       @buffer.string = "test\n"
       result = @interpreter.run('(gets)')
-      result.should == "test\n"
+      expect(result).to eq("test\n")
     end
     
     after :each do

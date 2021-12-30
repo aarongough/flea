@@ -17,7 +17,8 @@ describe "Standard Library" do
       result = @interpreter.run('
         (lambda () ())
       ')
-      result.should be_a Proc
+
+      expect(result).to be_a Proc
     end
 
     it "should create and execute a lambda that takes no arguments" do
@@ -25,14 +26,16 @@ describe "Standard Library" do
         ((lambda () 
           (display 1)))
       ')
-      result.should == 1
+
+      expect(result).to eq(1)
     end
     
     it "should create a lambda that takes a single argument" do
       result = @interpreter.run('
         (lambda a ())
       ')
-      result.should be_a Proc
+
+      expect(result).to be_a Proc
     end
     
     it "should take list as single argument" do
@@ -40,14 +43,16 @@ describe "Standard Library" do
         ((lambda a
           (display a)) 1 2 3)
       ')
-      result.should == [1, 2, 3]
+      
+      expect(result).to eq([1, 2, 3])
     end
     
     it "should create a lambda that takes multiple arguments" do
       result = @interpreter.run('
         (lambda (a b c) ())
       ')
-      result.should be_a Proc
+
+      expect(result).to be_a Proc
     end
     
     it "should create aand execute a lambda that takes multiple arguments" do
@@ -55,15 +60,16 @@ describe "Standard Library" do
         ((lambda (a b c)
           (display (+ a b c))) 1 2 3)
       ')
-      result.should == 6
+      
+      expect(result).to eq(6)
     end
     
     it "should raise an error when lamda is defined using same argument name more than once" do
-      lambda {
+      expect{
         @interpreter.run('
           (lambda (a a a) ())
         ')
-      }.should raise_error(TypeError)
+      }.to raise_error(TypeError)
     end
     
   end

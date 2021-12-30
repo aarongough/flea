@@ -10,7 +10,8 @@ describe "Standard Library" do
       result = @interpreter.run('
         (cdr (quote (10 2 2)))
       ')
-      result.should == [2, 2]
+
+      expect(result).to eq([2, 2])
     end
     
   end

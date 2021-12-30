@@ -12,7 +12,8 @@ describe "Standard Library" do
     it "should read data structure from STDIN" do
       @buffer.string = "(1 2.0 test (1 2 3))\n"
       result = @interpreter.run('(read)')
-      result.should == [[1, 2.0, :test, [1, 2, 3]]]
+
+      expect(result).to eq([[1, 2.0, :test, [1, 2, 3]]])
     end
     
     after :each do

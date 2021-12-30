@@ -9,14 +9,16 @@ describe "Standard Library" do
     it "should change the value of an existing variable" do
       @interpreter.run('
         (define test 1)
-        (set! test 2)')
-      @interpreter.base_environment.find(:test).should == 2
+        (set! test 2)'
+      )
+      
+      expect(@interpreter.base_environment.find(:test)).to eq(2)
     end
     
     it "should raise error when attempting to set unbound variable" do
-      lambda {
+      expect {
         @interpreter.run('(set! test 1)')
-      }.should raise_error(TypeError)
+      }.to raise_error(TypeError)
     end
     
   end

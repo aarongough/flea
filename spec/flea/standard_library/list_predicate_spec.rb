@@ -8,17 +8,17 @@ describe "Standard Library" do
     
     it "should should return true for an empty list" do
       result = @interpreter.run("(list? '())")
-      result.should == true
+      expect(result).to be true
     end
     
     it "return true for a populated list" do
       result = @interpreter.run("(list? '(a b c))")
-      result.should == true
+      expect(result).to be true
     end
     
     it "should return false for an atom" do
       result = @interpreter.run("(list? 'a)")
-      result.should == false
+      expect(result).to be false
     end
     
   end

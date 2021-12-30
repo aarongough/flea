@@ -8,7 +8,7 @@ describe "Standard Library" do
     
     it "should create a list from it's arguments" do
       result = @interpreter.run('(list 9 2 2)')
-      result.should == [9, 2, 2]
+      expect(result).to eq([9, 2, 2])
     end
     
     it "should evaluate its arguments before creating the list" do
@@ -17,7 +17,8 @@ describe "Standard Library" do
         (define b 9)
         (list b a a)
       ')
-      result.should == [9, 2, 2]
+      
+      expect(result).to eq([9, 2, 2])
     end
     
   end

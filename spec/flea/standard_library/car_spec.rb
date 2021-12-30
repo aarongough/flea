@@ -10,7 +10,8 @@ describe "Standard Library" do
       result = @interpreter.run('
         (car (quote (10 2 2)))
       ')
-      result.should == 10
+      
+      expect(result).to eq(10)
     end
     
   end

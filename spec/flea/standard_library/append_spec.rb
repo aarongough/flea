@@ -10,7 +10,8 @@ describe "Standard Library" do
       result = @interpreter.run('
         (append (quote (1 2 3)) (quote (1 2 3)))
       ')
-      result.should == [1, 2, 3, 1, 2, 3]
+
+      expect(result).to eq([1, 2, 3, 1, 2, 3])
     end
     
   end

@@ -12,8 +12,9 @@ describe "Standard Library" do
           (define test 1)
           (set! test 2))
       ')
-      result.should == 2
-      @interpreter.base_environment.find(:test).should == 2
+
+      expect(result).to equal(2)
+      expect(@interpreter.base_environment.find(:test)).to eq(2)
     end
     
   end

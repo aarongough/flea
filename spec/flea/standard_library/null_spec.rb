@@ -10,7 +10,8 @@ describe "Standard Library" do
       result = @interpreter.run('
         (null? \'())
       ')
-      result.should == true
+
+      expect(result).to be true
     end
     
     ["1", '"abc"', "(1 2 3)"].each do |value|
@@ -18,7 +19,8 @@ describe "Standard Library" do
         result = @interpreter.run("
           (null? (quote #{value}))
         ")
-        result.should == false
+        
+        expect(result).to be false
       end
     end
     
