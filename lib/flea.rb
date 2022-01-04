@@ -1,5 +1,7 @@
-require "sexpistol"
-require "stringio"
+# frozen_string_literal: true
 
-require "flea/environment"
-require "flea/interpreter"
+require 'sexpistol'
+require 'stringio'
+
+require 'flea/environment'
+require 'flea/interpreter'

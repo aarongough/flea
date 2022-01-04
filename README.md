@@ -1,3 +1,9 @@
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+[![Actions Status](https://github.com/aarongough/flea/actions/workflows/build.yml/badge.svg)](https://github.com/aarongough/flea/actions/workflows/build.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/eae94ce7c694372a56cb/maintainability)](https://codeclimate.com/github/aarongough/flea/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/eae94ce7c694372a56cb/test_coverage)](https://codeclimate.com/github/aarongough/flea/test_coverage)
+[![Gem Version](https://badge.fury.io/rb/flea.svg)](https://badge.fury.io/rb/flea)
+
 # Flea
 
 Flea is a tiny Lisp interpreter implemented in Ruby. Flea is not designed to be a production language, instead it is designed to be an example of how simple it can be to bootstrap the core of a small flexible language. Flea essentially defines an informal subset of Scheme, just enough to be fun and interesting.
@@ -9,22 +15,22 @@ This is the classic 'guess the number' program implemented in Flea:
 ```scheme
 (define number (+ (rand 9) 1))
 
-  (display "\n\nI'm thinking of a number between 1 and 10,\n")
-  (display "try to guess it!\n\n")
+(display "\n\nI'm thinking of a number between 1 and 10,\n")
+(display "try to guess it!\n\n")
 
-  (define user-guess 
-    (lambda () 
-      (display "Take a guess - ")
-      (define guess (string-to-num (gets)))
-      (if (equal? guess number)
-        (display "Good guess!\n")
-        (begin
-          (if (greater-than? guess number)
-            (display "Lower!\n")
-            (display "Higher!\n"))
-          (user-guess)))))
+(define user-guess 
+  (lambda () 
+    (display "Take a guess - ")
+    (define guess (string-to-num (gets)))
+    (if (equal? guess number)
+      (display "Good guess!\n")
+      (begin
+        (if (greater-than? guess number)
+          (display "Lower!\n")
+          (display "Higher!\n"))
+        (user-guess)))))
 
-  (user-guess)
+(user-guess)
 ```
 
 ### Installation:
@@ -335,5 +341,5 @@ any-spec ./bin/flea flea-language-spec/flea-language-spec.yaml
 
 Author: [Aaron Gough](mailto:aaron@aarongough.com)
 
-Copyright (c) 2021 [Aaron Gough](http://thingsaaronmade.com/), released under the MIT license
+Copyright © 2021 [Aaron Gough](http://thingsaaronmade.com/), released under the MIT license
 
