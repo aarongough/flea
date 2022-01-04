@@ -2,68 +2,67 @@
 
 module Flea
   class Interpreter
-   
-   attr_accessor :base_environment, 
-                 :current_environment,
-                 :parser
-   
+    attr_accessor :base_environment,
+                  :current_environment,
+                  :parser
+
     def initialize(options = {})
       options = {
-        :base_environment => Environment.new,
-        :load_standard_library => true
+        base_environment: Environment.new,
+        load_standard_library: true
       }.merge(options)
-      
+
       @base_environment = @current_environment = options[:base_environment]
       @parser = Sexpistol.new
       @parser.ruby_keyword_literals = false
       @parser.scheme_compatability = true
-      
+
       load_standard_library unless options[:load_standard_library] == false
     end
-    
+
     def run(program)
       expressions = parse(program)
       result = nil
       expressions.each do |expression|
         result = evaluate(expression)
       end
-      
-      return result
+
+      result
     end
-    
+
     def parse(string)
-      return @parser.parse_string(string)
+      @parser.parse_string(string)
     end
-    
+
     def evaluate(expression)
       return @current_environment.find(expression) if expression.is_a? Symbol
       return expression unless expression.is_a? Array
-      
+
       if expression[0] == :define
-        return @current_environment.define expression[1], evaluate(expression[2])
-        
+        @current_environment.define expression[1], evaluate(expression[2])
+
       elsif expression[0] == :native_function
-        return eval expression[1]
-        
+        eval expression[1]
+
       else # function call
         function = evaluate(expression[0])
-        raise RuntimeError, "\n#{@parser.to_sexp(expression)}\n ^\n\n#{expression[0]} is not a function" unless function.is_a? Proc
+        raise "\n#{@parser.to_sexp(expression)}\n ^\n\n#{expression[0]} is not a function" unless function.is_a? Proc
+
         arguments = expression.slice(1, expression.length)
-        return function.call(arguments, self)
+        function.call(arguments, self)
       end
     end
-    
-    private 
-    
+
+    private
+
     def load_standard_library
       library_pattern = File.join(File.dirname(__FILE__), 'standard_library', '*.scm')
-      
+
       Dir[library_pattern].each do |item|
         File.open(item) do |file|
           run(file.read)
         end
       end
     end
-    
   end
 end
