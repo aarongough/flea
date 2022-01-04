@@ -6,18 +6,13 @@ module Flea
                   :current_environment,
                   :parser
 
-    def initialize(options = {})
-      options = {
-        base_environment: Environment.new,
-        load_standard_library: true
-      }.merge(options)
-
-      @base_environment = @current_environment = options[:base_environment]
+    def initialize(base_environment: Environment.new, standard_library: true)
+      @base_environment = @current_environment = base_environment
       @parser = Sexpistol.new
       @parser.ruby_keyword_literals = false
       @parser.scheme_compatability = true
 
-      load_standard_library unless options[:load_standard_library] == false
+      load_standard_library if standard_library
     end
 
     def run(program)
@@ -30,21 +25,14 @@ module Flea
       result
     end
 
-    def parse(string)
-      @parser.parse_string(string)
-    end
-
     def evaluate(expression)
       return @current_environment.find(expression) if expression.is_a? Symbol
       return expression unless expression.is_a? Array
 
-      if expression[0] == :define
-        @current_environment.define expression[1], evaluate(expression[2])
-
-      elsif expression[0] == :native_function
-        eval expression[1]
-
-      else # function call
+      case expression[0]
+      when :define          then @current_environment.define expression[1], evaluate(expression[2])
+      when :native_function then eval expression[1]
+      else
         function = evaluate(expression[0])
         raise "\n#{@parser.to_sexp(expression)}\n ^\n\n#{expression[0]} is not a function" unless function.is_a? Proc
 
@@ -54,6 +42,10 @@ module Flea
     end
 
     private
+
+    def parse(string)
+      @parser.parse_string(string)
+    end
 
     def load_standard_library
       library_pattern = File.join(File.dirname(__FILE__), 'standard_library', '*.scm')

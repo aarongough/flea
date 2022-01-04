@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    flea (0.1.0)
+    flea (0.1.1)
       sexpistol (~> 0.0.7)
 
 GEM

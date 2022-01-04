@@ -22,3 +22,9 @@ Metrics/CyclomaticComplexity:
   
 Gemspec/RequireMFA:
   Enabled: false
+
+Naming/PredicateName:
+  AllowedMethods: ['has_variable?']
+
+Security/Eval:
+  Enabled: false

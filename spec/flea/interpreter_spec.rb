@@ -12,7 +12,7 @@ describe Flea::Interpreter do
       environment = double(:environment)
       interpreter = Flea::Interpreter.new(
         base_environment: environment,
-        load_standard_library: false
+        standard_library: false
       )
       expect(interpreter.base_environment).to eq(environment)
     end
@@ -28,17 +28,9 @@ describe Flea::Interpreter do
     end
   end
 
-  describe '#parse' do
-    it 'returns an abstract syntax tree representing the supplied program' do
-      ast = Flea::Interpreter.new.parse('(define test 1)')
-
-      expect(ast).to eq([[:define, :test, 1]])
-    end
-  end
-
   describe '#evaluate' do
     let(:environment) { double(:environment) }
-    let(:interpreter) { Flea::Interpreter.new(base_environment: environment, load_standard_library: false) }
+    let(:interpreter) { Flea::Interpreter.new(base_environment: environment, standard_library: false) }
 
     it 'returns the value of a variable' do
       allow(environment).to receive(:find).with(:test).and_return(1)
