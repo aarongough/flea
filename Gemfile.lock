@@ -55,7 +55,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  any-spec
+  any-spec (~> 0.1.0)
   flea!
   rspec (~> 3.2)
   rubocop
