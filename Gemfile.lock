@@ -58,7 +58,7 @@ DEPENDENCIES
   any-spec (~> 0.1.0)
   flea!
   rspec (~> 3.2)
-  rubocop
+  rubocop (~> 1.24.1)
   simplecov (~> 0.17.1)
 
 BUNDLED WITH
