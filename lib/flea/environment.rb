@@ -2,7 +2,7 @@
 
 module Flea
   class Environment
-    attr_accessor :parent
+    attr_accessor :parent, :table
 
     def initialize(parent = nil)
       @parent = parent

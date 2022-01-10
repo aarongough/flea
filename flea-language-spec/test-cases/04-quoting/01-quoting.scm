@@ -1,4 +1,4 @@
-(display (quote ( 1 "Hello!" #t #f )))
+(display (quote (1 "Hello!" #t #f)))
 
 ----
 

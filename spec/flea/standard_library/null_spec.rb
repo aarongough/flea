@@ -8,7 +8,7 @@ describe 'Standard Library' do
 
     it 'should return true for an empty list' do
       result = interpreter.run('
-        (null? \'())
+        (null? (quote ()))
       ')
 
       expect(result).to be true

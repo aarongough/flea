@@ -25,8 +25,7 @@ describe 'Standard Library' do
 
     it 'should create and execute a lambda that takes no arguments' do
       result = @interpreter.run('
-        ((lambda ()
-          (display 1)))
+        (((lambda ()(display 1))))
       ')
 
       expect(result).to eq(1)

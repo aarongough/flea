@@ -1,3 +1,3 @@
 (define null?
   (lambda (arg)
-    (equal? arg '())))
+    (equal? arg (quote ()))))

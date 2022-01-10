@@ -75,7 +75,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 (display "test")
 # => test
 
-(display '(1 2 3))
+(display (quote(1 2 3)))
 # => (1 2 3)
 ```
 
@@ -186,7 +186,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 `(list?)` Returns true if it's first argument is a list, false otherwise:
 
 ```scheme
-(list? '())
+(list? (quote ()))
 # => #t
 
 (list? 1)
@@ -196,7 +196,7 @@ Flea comes with a small but thoughtful standard library that includes functions 
 `(list-tail)` Returns a new list created by removing the first n elements of the provided list:
 
 ```scheme
-(define a '(1 2 3 4 5 6))
+(define a (quote (1 2 3 4 5 6)))
 (list-tail a 3)
 # => (4 5 6)
 ```
@@ -204,21 +204,21 @@ Flea comes with a small but thoughtful standard library that includes functions 
 `(car)` Returns the first item of a list:
 
 ```scheme
-(car '(1 2 3))
+(car (quote (1 2 3)))
 # => 1
 ```
 
 `(cdr)` Returns the remainder of a list:
 
 ```scheme
-(cdr '(1 2 3))
+(cdr (quote (1 2 3)))
 # => (2 3)
 ```
 
 `(cons)` Creates a new list by using it's first argument as the CAR it's second argument as the CDR:
 
 ```scheme
-(cons '(1 2 3) 3)
+(cons (quote (1 2 3)) 3)
 # => ((1 2 3) 3)
 
 (cons 1 2)
@@ -232,17 +232,17 @@ Flea comes with a small but thoughtful standard library that includes functions 
 `(append)` Creates a new list by concatenating it's arguments, it's first argument must be a list:
 
 ```scheme
-(append '(1 2) '(3 4) 5)
+(append (quote (1 2)) (quote (3 4)) 5)
 # => (1 2 3 4 5)
 ```
 
 `(null?)` Returns true if it's first argument is null (the empty list):
 
 ```scheme
-(null '())
+(null? (quote ()))
 # => #t
 
-(null '(1 2 3))
+(null? (quote (1 2 3)))
 # => #f
 
 (null? 1)
@@ -332,7 +332,7 @@ Making changes to Flea is made simpler by the presence of an extensive test suit
 Flea also has an 'executable language specification' which is a series of small programs that exercise every part of the language and also assert what the output for each small program should be. The language specification is written with the use of a helper tool called [AnySpec](https://github.com/aarongough/any-spec), and the test cases can be found at `/flea-language-spec`. To run the executable language specification run the following command from the root of the project directory:
 
 ```
-any-spec ./bin/flea flea-language-spec/flea-language-spec.yaml
+bundle exec any-spec ./bin/flea flea-language-spec/flea-language-spec.yaml
 ```
 
 ---

@@ -16,6 +16,11 @@ describe 'Standard Library' do
       expect(@buffer.string).to eq('1')
     end
 
+    it 'should output strings without quotes' do
+      @interpreter.run('(display "foo")')
+      expect(@buffer.string).to eq('foo')
+    end
+
     it 'should output a list' do
       @interpreter.run('(display (quote (1 2 3)))')
       expect(@buffer.string).to eq('(1 2 3)')

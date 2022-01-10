@@ -15,7 +15,7 @@ describe 'Standard Library' do
       @buffer.string = "(1 2.0 test (1 2 3))\n"
       result = @interpreter.run('(read)')
 
-      expect(result).to eq([[1, 2.0, :test, [1, 2, 3]]])
+      expect(result).to eq([1, 2.0, :test, [1, 2, 3]])
     end
 
     after :each do

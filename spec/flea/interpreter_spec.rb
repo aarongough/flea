@@ -11,7 +11,7 @@ describe Flea::Interpreter do
     it 'allows setting the base environment' do
       environment = double(:environment)
       interpreter = Flea::Interpreter.new(
-        base_environment: environment,
+        environment: environment,
         standard_library: false
       )
       expect(interpreter.base_environment).to eq(environment)
@@ -30,7 +30,7 @@ describe Flea::Interpreter do
 
   describe '#evaluate' do
     let(:environment) { double(:environment) }
-    let(:interpreter) { Flea::Interpreter.new(base_environment: environment, standard_library: false) }
+    let(:interpreter) { Flea::Interpreter.new(environment: environment, standard_library: false) }
 
     it 'returns the value of a variable' do
       allow(environment).to receive(:find).with(:test).and_return(1)
